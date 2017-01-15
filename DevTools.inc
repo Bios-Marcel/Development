@@ -1,14 +1,14 @@
 #define BENCHMARK(%0,%1,%2); \
 	{\
-	new start = GetTickCount();\
-	for(new count = 0; count < %1; count++)\
-	{\
-		%0;\
-	}\
-	printf("%s: %dms in %d iterations", %2, GetTickCount() - start, %1);\
-	}
+		new startTick = GetTickCount();\
+		for(new count = 0; count < %1; count++) %0;\
+		new endTick = GetTickCount();\
+		printf("%s: %dms in %d iterations", %2, endTick - startTick, %1);\
+	}  
 
-assertThat(title[], condition, expectedResult)
+#define ASSERT(%0,%1) assertThat("" # %0,%0,%1)
+
+stock assertThat(title[], condition, expectedResult)
 {
 	if(condition == expectedResult)
 	{

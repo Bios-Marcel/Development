@@ -6,8 +6,8 @@
 	printf("%s: %dms in %d iterations", %2, endTick - startTick, %1);\
 	}
 	
-// #define ASSERT(%0,%1); assertThat(#%0,%0,%1);
-
+#define ASSERT(%0(%1),%2) assertThat(#%0,%0(%1),%2)  
+	
 stock assertThat(title[], condition, expectedResult, bool:sendDefaultMessage = true)
 {
 	if(condition == expectedResult)

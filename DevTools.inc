@@ -1,4 +1,4 @@
-#define BENCHMARK(%0,%1,%2); \
+#define BENCHMARK(%0,%1,%2) \
 	{\
 	new startTick = GetTickCount();\
 	for(new count = 0; count < %1; count++) %0;\
@@ -18,7 +18,7 @@ new actualTest[100] = "";
 #define TEST_SUITE_START TEST_SUITE_START_EX()
 
 #define TEST_SUITE_START_EX(%0) \
-	format(actualTest, sizeof(actualTest), "%s", #%0); \
+	format(actualTest, sizeof(actualTest), "%s", #%0), print(" ");\
 	if(!skipTest && printf("Running test suite: %s", #%0) == 0)\
 	{
 
@@ -29,60 +29,50 @@ new actualTest[100] = "";
 	if(strlen(actualTest) >= 1)\
 	{\
 	printf("Skipping test suite: %s", actualTest);\
+	print(" ");\
 	skipTest = 0;\
 	}\
 	}
 
 #define ASSERT(%0(%1),%2) assertThat(#%0,%0(%1),%2)  
+#define ASSERT_TRUE(%0(%1)) assertTrue(#%0,%0(%1))  
+#define ASSERT_FALSE(%0(%1)) assertFalse(#%0,%0(%1))  
 
-stock assertThat(title[], condition, expectedResult, bool:sendDefaultMessage = true)
+stock assertThat(title[], condition, expectedResult)
 {
 	if(condition == expectedResult)
 	{
+		printf("%s: Pass", title);
 		return true;
 	}
 
-	if(sendDefaultMessage)
-	{
-		printf("%s: Expected: %d Result: %d", title, expectedResult, condition);	
-	}
+	printf("%s: Fail | Expected: %d | Result: %d", title, expectedResult, condition);	
 
 	return false;
 }
 
-stock assertTrue(title[], condition, bool:sendDefaultMessage = true)
+stock assertTrue(title[], condition)
 {
 	if(condition)
 	{
+		printf("%s: Pass", title);
 		return true;
 	}
 
-	if(sendDefaultMessage)
-	{
-		printf("%s: Expected: true Result: %d", title, boolToString(condition));
-	}
+	printf("%s: Fail | Expected: true | Result: false", title);
 
 	return false;
 }
 
-stock assertFalse(title[], condition, bool:sendDefaultMessage = true)
+stock assertFalse(title[], condition)
 {
 	if(!condition)
 	{
+		printf("%s: Pass", title);
 		return true;
 	}
 
-	if(sendDefaultMessage)
-	{
-		printf("%s: Expected: false Result: %d", title, booLToString(condition);)	
-	}
+	printf("%s: Fail |Expected: false | Result: true", title);	
 
 	return false;
-}
-
-stock boolToString(boolean)
-{
-	new string[6];
-	string = boolean ? "true" : "false";
-	return string;
 }

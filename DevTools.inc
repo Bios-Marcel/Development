@@ -48,7 +48,7 @@ stock assertThat(title[], result, expectedResult)
 		return true;
 	}
 
-	printf("	%s: Fail | Expected: %d | Result: %d", title, expectedResult, result);	
+	printf("%s: Fail | Expected: %d | Result: %d", title, expectedResult, result);	
 
 	return false;
 }
@@ -61,7 +61,7 @@ stock assertString(title[], result[], expectedResult[])
 		return true;
 	}
 
-	printf("	%s: Fail | Expected: %s | Result: %s", title, expectedResult, result);	
+	printf("%s: Fail | Expected: %s | Result: %s", title, expectedResult, result);	
 
 	return false;
 }
@@ -75,7 +75,7 @@ stock assertTrue(title[], result)
 		return true;
 	}
 
-	printf("	%s: Fail | Expected: true | Result: false", title);
+	printf("%s: Fail | Expected: true | Result: false", title);
 
 	return false;
 }
@@ -88,7 +88,7 @@ stock assertFalse(title[], result)
 		return true;
 	}
 
-	printf("	%s: Fail |Expected: false | Result: true", title);	
+	printf("%s: Fail |Expected: false | Result: true", title);	
 
 	return false;
 }

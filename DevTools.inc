@@ -36,25 +36,40 @@ new actualTest[100] = "";
 
 #define ASSERT_NO_PARAM(%0,%1) assertThat(#%0,%0,%1)  
 #define ASSERT(%0(%1),%2) assertThat(#%0,%0(%1),%2)  
+#define ASSERT_STRING(%0(%1),%2) assertString(#%0,%0(%1),#%2)  
 #define ASSERT_TRUE(%0(%1)) assertTrue(#%0,%0(%1))  
 #define ASSERT_FALSE(%0(%1)) assertFalse(#%0,%0(%1))  
 
-stock assertThat(title[], condition, expectedResult)
+stock assertThat(title[], result, expectedResult)
 {
-	if(condition == expectedResult)
+	if(result == expectedResult)
 	{
 		printf("%s: Pass", title);
 		return true;
 	}
 
-	printf("%s: Fail | Expected: %d | Result: %d", title, expectedResult, condition);	
+	printf("%s: Fail | Expected: %d | Result: %d", title, expectedResult, result);	
 
 	return false;
 }
 
-stock assertTrue(title[], condition)
+stock assertString(title[], result[], expectedResult[])
 {
-	if(condition)
+	if(!strcmp(result, expectedResult))
+	{
+		printf("%s: Pass", title);
+		return true;
+	}
+
+	printf("%s: Fail | Expected: %s | Result: %s", title, expectedResult, result);	
+
+	return false;
+}
+
+
+stock assertTrue(title[], result)
+{
+	if(result)
 	{
 		printf("%s: Pass", title);
 		return true;
@@ -65,9 +80,9 @@ stock assertTrue(title[], condition)
 	return false;
 }
 
-stock assertFalse(title[], condition)
+stock assertFalse(title[], result)
 {
-	if(!condition)
+	if(!result)
 	{
 		printf("%s: Pass", title);
 		return true;

@@ -34,6 +34,7 @@ new actualTest[100] = "";
 	}\
 	}
 
+#define ASSERT_NO_PARAM(%0,%1) assertThat(#%0,%0,%1)  
 #define ASSERT(%0(%1),%2) assertThat(#%0,%0(%1),%2)  
 #define ASSERT_TRUE(%0(%1)) assertTrue(#%0,%0(%1))  
 #define ASSERT_FALSE(%0(%1)) assertFalse(#%0,%0(%1))  
